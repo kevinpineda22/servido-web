@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Actividades Merkahorro</title>
+    <link rel="stylesheet" href="stlyle.css">
+</head>
+<body>
+
+       
+
+
+    <h1>Registro de Actividades Merkahorro</h1>
+
+    <form id="activityForm">
+        <div class="form-group">
+            <label for="employee">Encargado:</label>
+            <select id="employee" name="employee" required>
+                <option value="">Seleccione una opción</option>
+                <option value="Inventario">Inventario</option>
+                <option value="Procesos">Procesos</option>
+                <option value="Sistemas">Sistemas</option>
+                <option value="Proyecto">Proyecto</option>
+                <option value="Almacen">Almacén</option>
+                <option value="Auditor unidad de negocio">Auditor unidad de negocio</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="activity">Actividad:</label>
+            <input type="text" id="activity" name="activity" required>
+        </div>
+
+        <div class="form-group">
+            <label for="estado">Estado:</label>
+            <select id="estado" name="estado" required>
+                <option value="">Seleccione una opción</option>
+                <option value="completado">Completado</option>
+                <option value="en_proceso">En proceso</option>
+                <option value="no_completado">No completado</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="startDate">Fecha de inicio:</label>
+            <input type="date" id="startDate" name="startDate" required>
+        </div>
+
+        <div class="form-group">
+            <label for="endDate">Fecha final:</label>
+            <input type="date" id="endDate" name="endDate" required>
+        </div>
+
+        <div class="form-group">
+            <label for="observacion">Observación:</label>
+            <input type="text" id="observacion" name="observacion">
+        </div>
+
+        <div class="form-group">
+            <button type="submit">Registrar Actividad</button>
+        </div>
+    </form>
+    
+    <table>
+        <thead>
+            <div class="logo-container">
+                <img src="imagenes/merkahorro.jpg" alt="Logo Merkahorro" class="logo">
+            </div>
+            <tr>
+                <th>Actividad</th>
+                <th>Encargado</th>
+                <th>Estado</th>
+                <th>Fecha de inicio</th>
+                <th>Fecha final</th>
+                <th>Observaciones</th>
+            </tr>
+        </thead>
+        <tbody id="activityTableBody">
+            <!-- Aquí se agregarán las nuevas filas -->
+        </tbody>
+    </table>
+
+<script src="conexion.js"></script>
+</body>
+</html>
