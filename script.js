@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        fetch('http://localhost:3000/save-activity', {
+        fetch('https://servido-web.onrender.com', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
