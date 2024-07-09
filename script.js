@@ -9,14 +9,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const estado = document.getElementById('estado').value;
         const startDate = document.getElementById('startDate').value;
         const endDate = document.getElementById('endDate').value;
-        const observacion = document.getElementById('observacion').value;
+       
 
         if (!activity || !employee || !estado || !startDate || !endDate) {
             alert('Por favor, complete todos los campos.');
             return;
         }
 
-        fetch('https://servido-web.onrender.com', {
+        fetch('http://localhost:3000/save-activity', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -26,8 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 employee,
                 startDate,
                 endDate,
-                estado,
-                observacion
+                estado
+                
             })
         })
         .then(response => {
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td>${estado}</td>
                 <td>${startDate}</td>
                 <td>${endDate}</td>
-                <td>${observacion}</td>
+               
             `;
 
             tableBody.appendChild(newRow);

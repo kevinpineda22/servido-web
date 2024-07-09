@@ -1,7 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs');
-const XLSX = require('xlsx');
+const ExcelJS = require('exceljs');
+const workbook = new ExcelJS.Workbook();
 const cors = require('cors');
 const path = require('path');
 
@@ -13,10 +14,33 @@ app.use(bodyParser.json());
 
 const filePath = path.join('C:', 'xampp', 'htdocs', 'activities.xlsx');
 
-// Función para intentar escribir en el archivo con manejo de errores
-function tryWriteFile(workbook, filePath, res) {
+// Función para agregar una fila con estilos preservados
+async function addRowWithStyles(data, res) {
+    
+
+    // Leer el archivo Excel existente o crear uno nuevo
+    if (fs.existsSync(filePath)) {
+        await workbook.xlsx.readFile(filePath);
+    } else {
+        const worksheet = workbook.addWorksheet('Sheet1');
+        worksheet.addRow(['Actividad', 'Encargado', 'Estado', 'Fecha de inicio', 'Fecha final']);
+        await workbook.xlsx.writeFile(filePath);
+        await workbook.xlsx.readFile(filePath);
+    }
+
+    const worksheet = workbook.getWorksheet(1);
+    const newRow = worksheet.addRow([data.activity, data.employee, data.estado, data.startDate, data.endDate]);
+
+    // Copiar estilos de la fila anterior
+    const lastRow = worksheet.getRow(worksheet.rowCount - 1);
+    lastRow.eachCell((cell, colNumber) => {
+        const newCell = newRow.getCell(colNumber);
+        newCell.style = cell.style;
+    });
+
+    // Escribir el archivo Excel
     try {
-        XLSX.writeFile(workbook, filePath);
+        await workbook.xlsx.writeFile(filePath);
         console.log('Archivo Excel actualizado');
         res.send('Actividad guardada exitosamente en el archivo Excel');
     } catch (error) {
@@ -35,29 +59,8 @@ app.post('/save-activity', (req, res) => {
     const data = req.body;
     console.log('Datos recibidos:', data);
 
-    // Lee el archivo Excel existente o crea uno nuevo
-    let workbook;
-    if (fs.existsSync(filePath)) {
-        workbook = XLSX.readFile(filePath);
-    } else {
-        workbook = XLSX.utils.book_new();
-    }
-
-    let worksheet;
-    if (workbook.SheetNames.length) {
-        worksheet = workbook.Sheets[workbook.SheetNames[0]];
-    } else {
-        worksheet = XLSX.utils.aoa_to_sheet([['Actividad', 'Encargado', 'Estado', 'Fecha de inicio', 'Fecha final', 'Observaciones']]);
-        XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
-    }
-
-    // Añadir nueva fila con la actividad
-    const newRow = [data.activity, data.employee, data.estado, data.startDate, data.endDate, data.observacion];
-    XLSX.utils.sheet_add_aoa(worksheet, [newRow], { origin: -1 });
-    console.log('Nueva fila añadida:', newRow);
-
-    // Escribir el archivo Excel
-    tryWriteFile(workbook, filePath, res);
+    // Añadir nueva fila con la actividad y mantener estilos
+    addRowWithStyles(data, res);
 });
 
 // Ruta para manejar GET en /
