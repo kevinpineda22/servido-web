@@ -12,7 +12,7 @@ const PORT = 3000;
 app.use(cors());
 app.use(bodyParser.json());
 
-const filePath = path.join('C:', 'xampp', 'htdocs', 'activities.xlsx');
+const filePath = path.join('C:', 'Users', 'USER',"Documents", 'pruebassss.xlsx');
 
 // Función para agregar una fila con estilos preservados
 async function addRowWithStyles(data, res) {
@@ -69,5 +69,5 @@ app.get('/', (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Servidor corriendo en http://localhost:${PORT}`);
+    console.log('Servidor corriendo en http://localhost:${PORT}');
 });

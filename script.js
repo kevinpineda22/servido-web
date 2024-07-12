@@ -7,14 +7,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const activity = document.getElementById('activity').value;
         const employee = document.getElementById('employee').value;
         const estado = document.getElementById('estado').value;
-        const startDate = document.getElementById('startDate').value;
-        const endDate = document.getElementById('endDate').value;
-       
+        let startDate = document.getElementById('startDate').value;
+        let endDate = document.getElementById('endDate').value;
 
         if (!activity || !employee || !estado || !startDate || !endDate) {
             alert('Por favor, complete todos los campos.');
             return;
         }
+
+        // Formatear las fechas
+        startDate = formatDate(startDate);
+        endDate = formatDate(endDate);
 
         fetch('http://localhost:3000/save-activity', {
             method: 'POST',
@@ -27,7 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 startDate,
                 endDate,
                 estado
-                
             })
         })
         .then(response => {
@@ -48,7 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td>${estado}</td>
                 <td>${startDate}</td>
                 <td>${endDate}</td>
-               
             `;
 
             tableBody.appendChild(newRow);
@@ -59,5 +60,13 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Error al registrar la actividad:', error);
             alert('Hubo un error al registrar la actividad. Consulta la consola para más detalles.');
         });
+    }
+
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Los meses van de 0 a 11
+        const year = date.getFullYear();
+        return `${day}/${month}/${year}`;
     }
 });
