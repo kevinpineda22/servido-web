@@ -12,8 +12,13 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(bodyParser.json());
 
-const filePath = path.join('C:', 'Users', 'USER', 'Documents', 'pruebassss.xlsx');
+const filePath = path.join(__dirname, 'pruebassss.xlsx');
 
+// Verificar y crear la carpeta si no existe
+const folderPath = path.join(__dirname, 'excel');
+if (!fs.existsSync(folderPath)) {
+    fs.mkdirSync(folderPath);
+}
 // Función para agregar una fila con estilos preservados
 async function addRowWithStyles(data, res) {
     let workbook = new ExcelJS.Workbook();
