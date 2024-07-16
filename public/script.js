@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         startDate = formatDate(startDate);
         endDate = formatDate(endDate);
 
-        fetch('https://servido-web-kbuo.onrender.com/save-activity', {
+        fetch('https://servido-web-f2kr.onrender.com//save-activity', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
