@@ -2,7 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs');
 const ExcelJS = require('exceljs');
-const workbook = new ExcelJS.Workbook();
 const cors = require('cors');
 const path = require('path');
 
@@ -12,12 +11,12 @@ const PORT = 3000;
 app.use(cors());
 app.use(bodyParser.json());
 
-const filePath = path.join('C:', 'Users', 'USER',"Documents", 'pruebassss.xlsx');
+const filePath = path.join('C:', 'Users', 'USER', 'Documents', 'pruebassss.xlsx');
 
 // Función para agregar una fila con estilos preservados
 async function addRowWithStyles(data, res) {
+    let workbook = new ExcelJS.Workbook();
     
-
     // Leer el archivo Excel existente o crear uno nuevo
     if (fs.existsSync(filePath)) {
         await workbook.xlsx.readFile(filePath);
@@ -29,14 +28,18 @@ async function addRowWithStyles(data, res) {
     }
 
     const worksheet = workbook.getWorksheet(1);
+
+    // Añadir nueva fila a la hoja
     const newRow = worksheet.addRow([data.activity, data.employee, data.estado, data.startDate, data.endDate]);
 
-    // Copiar estilos de la fila anterior
-    const lastRow = worksheet.getRow(worksheet.rowCount - 1);
-    lastRow.eachCell((cell, colNumber) => {
-        const newCell = newRow.getCell(colNumber);
-        newCell.style = cell.style;
-    });
+    // Copiar estilos de la fila anterior si existe
+    if (worksheet.rowCount > 1) {
+        const lastRow = worksheet.getRow(worksheet.rowCount - 1);
+        lastRow.eachCell((cell, colNumber) => {
+            const newCell = newRow.getCell(colNumber);
+            newCell.style = cell.style;
+        });
+    }
 
     // Escribir el archivo Excel
     try {
@@ -54,6 +57,14 @@ async function addRowWithStyles(data, res) {
     }
 }
 
+// Servir archivos estáticos desde la carpeta 'public'
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Ruta para la página principal
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
 // Ruta para manejar POST en /save-activity
 app.post('/save-activity', (req, res) => {
     const data = req.body;
@@ -69,5 +80,5 @@ app.get('/', (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log('Servidor corriendo en http://localhost:${PORT}');
+    console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
