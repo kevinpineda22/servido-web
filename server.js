@@ -13,11 +13,7 @@ app.use(bodyParser.json());
 
 const filePath = path.join('C:', 'Users', 'USER', 'Documents', 'pruebassss.xlsx');
 
-// Verificar y crear la carpeta si no existe
-const folderPath = path.dirname(filePath);
-if (!fs.existsSync(folderPath)) {
-    fs.mkdirSync(folderPath, { recursive: true });
-}
+
 
 // Función para agregar una fila con estilos preservados
 async function addRowWithStyles(data, res) {
@@ -27,7 +23,7 @@ async function addRowWithStyles(data, res) {
     if (fs.existsSync(filePath)) {
         await workbook.xlsx.readFile(filePath);
     } else {
-        const worksheet = workbook.addWorksheet('Sheet1');
+        const worksheet = workbook.addWorksheet('Hoja1');
         worksheet.addRow(['Actividad', 'Encargado', 'Estado', 'Fecha de inicio', 'Fecha final']);
         await workbook.xlsx.writeFile(filePath);
         await workbook.xlsx.readFile(filePath);
