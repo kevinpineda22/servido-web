@@ -6,16 +6,14 @@ const cors = require('cors');
 const path = require('path');
 
 const app = express();
-const PORT = 3816
+const PORT = 3000
 
 app.use(cors());
 app.use(bodyParser.json());
 
-// Ruta absoluta en tu entorno local
-const localFilePath  = path.join('C:', 'Users', 'USER', 'Downloads', 'libro.xlsx')
 
-// Ruta usando variable de entorno en Render
-const filePath = process.env.EXCEL_FILE_PATH || localFilePath;
+const filePath = path.join('C:', 'Users', 'USER', 'Downloads', 'libro.xlsx');
+
 
 
 

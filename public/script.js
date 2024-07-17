@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         startDate = formatDate(startDate);
         endDate = formatDate(endDate);
 
-        fetch('http://localhost:3816/save-activity' , {
+        fetch('http://localhost:3000/save-activity' , {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
