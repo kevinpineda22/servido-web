@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(bodyParser.json());
 
-const filePath = path.join(__dirname, 'pruebassss.xlsx');
+const filePath = path.join('C:', 'Users', 'USER', 'Documents', 'pruebassss.xlsx');
 
 // Verificar y crear la carpeta si no existe
 const folderPath = path.join(__dirname, 'excel');
