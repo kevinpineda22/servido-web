@@ -11,8 +11,11 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(bodyParser.json());
 
-// Definir filePath utilizando path.join para asegurar una ruta absoluta
-const filePath = process.env.EXCEL_FILE_PATH || path.join(__dirname, 'libro.xlsx');
+// Ruta absoluta en tu entorno local
+const localFilePath  = path.join('C:', 'Users', 'USER', 'Downloads', 'libro.xlsx')
+
+// Ruta usando variable de entorno en Render
+const filePath = process.env.EXCEL_FILE_PATH || localFilePath;
 
 
 
