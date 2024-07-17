@@ -1,7 +1,8 @@
 'https://servido-web-f2kr.onrender.com/save-activity' : Ruta del servidor Render
 
-const filePath = path.join(__dirname, 'pruebassss.xlsx'); : Ruta carpeta del excel
 
 const filePath = path.join('C:', 'Users', 'USER', 'Documents', 'pruebassss.xlsx'); : Ruta real del archivo excel
 
 'http://localhost:3000/save-activity' : Ruta de fetch para el servidor local
+
+const filePath = path.join('C:', 'Users', 'USER', 'Documents', 'pruebassss.xlsx'); : Ruta carpeta de excel

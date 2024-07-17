@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(bodyParser.json());
 
-const filePath = path.join('C:', 'Users', 'USER', 'Documents', 'pruebassss.xlsx');
+const filePath = process.env.EXCEL_FILE_PATH || 'pruebassss.xlsx';
 
 
 
