@@ -8,19 +8,20 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-
 app.use(cors());
 app.use(bodyParser.json());
 
 const filePath = path.join('C:', 'Users', 'USER', 'Documents', 'pruebassss.xlsx');
 
+
 // Verificar y crear la carpeta si no existe
-const folderPath = path.join(__dirname, 'excel');
+const folderPath = path.dirname(filePath);
 if (!fs.existsSync(folderPath)) {
-    fs.mkdirSync(folderPath);
+    fs.mkdirSync(folderPath, { recursive: true });
 }
+
 // Función para agregar una fila con estilos preservados
-async function addRowWithStyles(data, res) {
+async function addRowWithStyles(data, res) {d
     let workbook = new ExcelJS.Workbook();
     
     // Leer el archivo Excel existente o crear uno nuevo
@@ -78,11 +79,6 @@ app.post('/save-activity', (req, res) => {
 
     // Añadir nueva fila con la actividad y mantener estilos
     addRowWithStyles(data, res);
-});
-
-// Ruta para manejar GET en /
-app.get('/', (req, res) => {
-    res.send('Servidor corriendo');
 });
 
 app.listen(PORT, () => {
