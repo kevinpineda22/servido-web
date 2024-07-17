@@ -11,7 +11,8 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(bodyParser.json());
 
-const filePath = process.env.EXCEL_FILE_PATH || 'libro.xlsx';
+// Definir filePath utilizando path.join para asegurar una ruta absoluta
+const filePath = process.env.EXCEL_FILE_PATH || path.join(__dirname, 'libro.xlsx');
 
 
 
@@ -23,7 +24,7 @@ async function addRowWithStyles(data, res) {
     if (fs.existsSync(filePath)) {
         await workbook.xlsx.readFile(filePath);
     } else {
-        const worksheet = workbook.addWorksheet('Hoja1');
+        const worksheet = workbook.addWorksheet('Sheet1');
         worksheet.addRow(['Actividad', 'Encargado', 'Estado', 'Fecha de inicio', 'Fecha final']);
         await workbook.xlsx.writeFile(filePath);
         await workbook.xlsx.readFile(filePath);
