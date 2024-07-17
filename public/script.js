@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('activityForm').addEventListener('submit', handleFormSubmit);
+    console.log("Ruta del archivo Excel:", process.env.EXCEL_FILE_PATH);
+
 
     function handleFormSubmit(event) {
         event.preventDefault(); // Evitar el envío automático del formulario
@@ -19,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         startDate = formatDate(startDate);
         endDate = formatDate(endDate);
 
-        fetch('https://servido-web-f2kr.onrender.com/save-activity' , {
+        fetch('http://localhost:3816/save-activity' , {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
