@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('activityForm').addEventListener('submit', handleFormSubmit);
-    console.log("Ruta del archivo Excel:", process.env.EXCEL_FILE_PATH);
+    
 
 
     function handleFormSubmit(event) {
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         startDate = formatDate(startDate);
         endDate = formatDate(endDate);
 
-        fetch('http://11.11.13.207:3816/save-activity' , {
+        fetch('http://192.168.1.200:3816/save-activity' , {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
