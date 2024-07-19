@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Formatear las fechas
         startDate = formatDate(startDate);
         endDate = formatDate(endDate);
+        
 
         fetch('http://192.168.1.200:3816/save-activity' , {
             method: 'POST',
