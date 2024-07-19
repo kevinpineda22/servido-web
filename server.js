@@ -11,7 +11,8 @@ const PORT = 3816;
 app.use(cors());
 app.use(bodyParser.json());
 
-const filePath = path.join('C:', 'Users', 'USER', 'Downloads', 'libro.xlsx');
+
+const filePath = path.join('C:', 'Users', 'Desarrollo', 'Documents', 'RegistroOperaciones.xlsx');
 
 // Configurar base de datos SQLite
 const db = new sqlite3.Database(':memory:');
@@ -131,5 +132,5 @@ app.get('/', (req, res) => {
 });
 
 app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Servidor corriendo en http://11.11.13.207:${PORT}`);
+    console.log(`Servidor corriendo en http://192.168.1.200:${PORT}`);
 });
