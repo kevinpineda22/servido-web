@@ -10,7 +10,8 @@ const PORT = 3816;
 app.use(cors());
 app.use(bodyParser.json());
 
-const filePath = path.join('C:', 'Users', 'Desarrollo', 'Documents', 'RegistroOperaciones.xlsx');
+
+const filePath = path.join('C:', 'Users', 'Desarrollo', 'Desktop', 'RegistroOperaciones.xlsx');
 
 // Función para agregar una fila con estilos preservados
 async function addRowWithStyles(data, res) {
