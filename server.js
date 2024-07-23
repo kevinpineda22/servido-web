@@ -11,7 +11,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 
-const filePath = path.join('C:', 'Users', 'Desarrollo', 'Desktop', 'RegistroOperaciones.xlsx');
+const filePath = path.join('D:', 'Operaciones', 'RegistroOperaciones.xlsx');
 
 // Función para agregar una fila con estilos preservados
 async function addRowWithStyles(data, res) {
